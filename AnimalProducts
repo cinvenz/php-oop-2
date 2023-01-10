@@ -1,0 +1,17 @@
+<?php
+
+class AnimalProducts
+{
+    public $productname;
+    public $price;
+    public $code;
+    public $description;
+
+    public function __construct($productname, $price, $code, $description)
+    {
+        $this->productname = $productname;
+        $this->price = $price;
+        $this->code = $code;
+        $this->description = $description;
+    }
+}
