@@ -11,7 +11,21 @@ class AnimalProducts
     {
         $this->productname = $productname;
         $this->price = $price;
-        $this->code = $code;
+        $this->setCode($code);
         $this->description = $description;
+    }
+
+    public function setPrice($price)
+    {
+        if (is_integer($price) && $price >= 0) {
+            $this->price = $price;
+        }
+        return $price;
+    }
+
+    public function setCode($code)
+    {
+        mt_rand(10000, 99999);
+        return $code;
     }
 }

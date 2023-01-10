@@ -9,6 +9,3 @@ class User
         $this->creditCard = $creditCard;
     }
 }
-
-$creditCard = new CreditCard('984948494', 123, '12/12');
-$userVincenzo = new User($creditCard);
