@@ -2,30 +2,45 @@
 
 class AnimalProducts
 {
+    private string $id;
     public $productname;
     public $price;
-    public $code;
     public $description;
+    private int $availableQty;
+    private int $availableStartMonth;
+    private int $availableEndMonth;
 
-    public function __construct($productname, $price, $code, $description)
+    public function __construct($id, $productname, $price, $description, $availableQty)
     {
+        $this->id = $id;
         $this->productname = $productname;
         $this->price = $price;
-        $this->setCode($code);
         $this->description = $description;
+        $this->availableQty = $availableQty;
     }
 
-    public function setPrice($price)
+
+    public function isAvailable()
     {
-        if (is_integer($price) && $price >= 0) {
-            $this->price = $price;
+        if ($this->availableQty == 0) {
+            return false;
         }
-        return $price;
+        $currentMonth = (int) date('m');
+        if ($this->availableStartMonth <= $currentMonth && $currentMonth <= $this->availableEndMonth) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    public function setCode($code)
+    public function getPrice()
     {
-        mt_rand(10000, 99999);
-        return $code;
+        return $this->price;
+    }
+
+    public function decrementAvailableQty()
+    {
+        $this->availableQty--;
+        return $this;
     }
 }

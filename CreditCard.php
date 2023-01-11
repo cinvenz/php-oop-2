@@ -2,33 +2,44 @@
 
 class CreditCard
 {
-    private $number;
-    private $cvc;
-    private $expiry;
+    private string $id;
+    private string $number;
+    private int $expiryYear;
+    private int $expiryMonth;
 
-    public function __construct($number, $cvc, $expiry)
+    public function __construct(string $number, int $expiryYear, int $expiryMonth)
     {
         $this->number = $number;
-        $this->cvc = $cvc;
-        $this->expiry = $expiry;
+        $this->expiryYear = $expiryYear;
+        $this->expiryMonth = $expiryMonth;
     }
 
-    static public function checkexpiry($expiry)
+    public function isExpired(): bool
+    {
+        if ((int) date('y') < $this->expiryYear) {
+            return false;
+        } else if ((int) date('y') == $this->expiryYear && (int) date('n') < $this->expiryMonth) {
+            return false;
+        }
+        return true;
+    }
+
+    public function save()
+    {
+        $this->id = 'id from database';
+        return $this;
+    }
+
+    public static function get(int $id)
     {
     }
 
-    static public function checknumber($number)
+    public function pay(float $amount): bool
     {
-    }
-
-    static public function checkcvc($cvc)
-    {
-    }
-
-    public function pay($amount)
-    {
-        // pagare la somma
+        if ($this->isExpired()) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }
-
-$creditCardPlayer1 = new CreditCard('19191919191', 432, '10/25');
