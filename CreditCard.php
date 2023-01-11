@@ -14,6 +14,16 @@ class CreditCard
         $this->expiryMonth = $expiryMonth;
     }
 
+    public function setNumber($number)
+    {
+        if (is_integer($number) && $number >= 0) {
+            $this->number = $number;
+        } elseif (!is_int($number)) {
+            throw new Exception('Is not a number');
+        }
+        return $number;
+    }
+
     public function isExpired(): bool
     {
         if ((int) date('y') < $this->expiryYear) {
